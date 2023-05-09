@@ -83,8 +83,10 @@ class ApoderadoAlumnoController extends ApiController
 
             if($request->responsable){//quitar responsabilidad a apoderado anterior
                 $a_reponsable = ApoderadoAlumno::where('alumno_id',$request->alumno_id)->where('responsable',true)->first();
-                $a_reponsable->responsable = false;
-                $a_reponsable->save();
+                if(!is_null($a_reponsable)){
+                    $a_reponsable->responsable = false;
+                    $a_reponsable->save(); 
+                }
             }
 
             $apoderado_alumno = ApoderadoAlumno::create([

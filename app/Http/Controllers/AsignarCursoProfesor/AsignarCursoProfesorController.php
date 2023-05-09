@@ -15,8 +15,8 @@ class AsignarCursoProfesorController extends ApiController
 {
     public function __construct()
     {
-        /*parent::__construct();
-        $this->middleware('scope:asignarprofesores')->except(['index','getInfoProfesor','getAlumnos','cursoGradoNivel','show','getOne','getAll']);*/
+        parent::__construct();
+        $this->middleware('scope:asignarprofesores')->except(['index','getInfoProfesor','getAlumnos','cursoGradoNivel','show','getOne','getAll']);
     }
 
     public function index()
