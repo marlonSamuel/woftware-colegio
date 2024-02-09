@@ -366,6 +366,7 @@ export default {
                 }
                 this.$toastr.success('Examen iniciado', 'éxito')
                 self.dialog = false
+                self.init_page = true
                 self.getCuestionario(self.asignacion_alumno_id)
             })
         .catch(r => {});
@@ -438,7 +439,7 @@ export default {
                         self.setTimeCounter()
                     }
                 }
-
+                
                 self.init_page = false
 
             }).catch(e => {
