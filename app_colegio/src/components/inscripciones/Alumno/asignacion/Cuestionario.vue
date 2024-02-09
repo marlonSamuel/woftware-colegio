@@ -259,6 +259,8 @@ export default {
         count_message: '',
         tiempo: null,
         e1: 0,
+        init_page: true,
+        close: null,
         form: {
             'id' : null,
             'nota' : null,
@@ -308,6 +310,8 @@ export default {
       let self = this
       let hora_inicio = self.asignacion.hora_inicio_cuestionario
       if(hora_inicio !== null){
+        console.log('refresh or inicio page',self.init_page)
+        
         var counter = 59
         hora_inicio = moment(hora_inicio)
         let hora_fin = moment(hora_inicio).add(self.asignacion.asignacion.tiempo,'m')
@@ -316,24 +320,27 @@ export default {
         //let now = moment().format('YYYY-MM-DD HH:mm')
         var duration = moment.duration(hora_fin.diff(now))
 
-        self.tiempo = parseInt(duration.asMinutes()) - 1
+        self.tiempo = parseInt(duration.asMinutes())+1 //- 1//descomentar luego
 
         if(self.tiempo < 0){
             console.log("tiempo expirado")
             return
         }
 
-        var close = setInterval(function()
+        self.close = setInterval(function()
             { 
+                console.log(counter)
                 let seconds = counter < 10 ? '0'+counter : counter
-                self.count_message = 'Tiempo (minutos): '+ self.asignacion.asignacion.tiempo + ' / '+self.tiempo +':'+seconds
+                let cmessage = 'Tiempo (minutos): '+ self.asignacion.asignacion.tiempo + ' / '+self.tiempo +':'+seconds
+                self.count_message = cmessage
+
                 counter = counter - 1
                 if(counter < 0){
                     counter = 59
                     self.tiempo = self.tiempo - 1
                 }
                 if(self.tiempo < 0){
-                    clearInterval(close)
+                    clearInterval(self.close)
                     self.terminar()
                     console.log("tiempo terminado")
                 }
@@ -380,6 +387,7 @@ export default {
                 if (self.$store.state.global.captureError(r)) {
                     return;
                 }
+                clearInterval(self.close)
                 this.$toastr.success('Examen entregado con éxito', 'éxito')
                 self.getCuestionario(self.asignacion_alumno_id)
             })
@@ -426,10 +434,12 @@ export default {
                     if(self.date_expire)
                         self.dialog = false
                         
-                    if(!self.time_expire && self.asignacion.hora_inicio_cuestionario !== null){
+                    if(!self.time_expire && self.asignacion.hora_inicio_cuestionario !== null && self.init_page){
                         self.setTimeCounter()
                     }
                 }
+
+                self.init_page = false
 
             }).catch(e => {
 
@@ -534,7 +544,7 @@ export default {
             if (result) {
                 let data = self.createResponse(serie)
                 let confirm_message = 'Por favor, verifiqué sus respuestas antes de pasar a la siguiente serie, ya no será posible volver a una serie anterior'
-
+                let s_l = self.series.length;
                 if(serie.serie.tipo_serie !== "PD"){
                     self.$confirm(confirm_message).then(res => {
                         self.e1 = value

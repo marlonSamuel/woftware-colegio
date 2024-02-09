@@ -67,17 +67,14 @@ class AlumnoController extends ApiController
             'primer_apellido' => 'required|string',
             'fecha_nac' => 'required',
             'genero' => 'required',
-            'direccion' => 'required|string',
-            'email'=>'unique:alumnos'
+            'direccion' => 'required|string'
+            //'email'=>'unique:alumnos'
         ];
         
         $this->validate($request, $reglas);
 
         DB::beginTransaction();
             $alumno_exists = Alumno::where('codigo',$request->codigo)->first();     
-
-
-            
             if(!is_null($alumno_exists)) return $this->errorResponse('codigo de alumno ya fue asignado',422);
 
 

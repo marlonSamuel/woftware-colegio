@@ -40,7 +40,7 @@ import NotaService from '../services/NotaService'
 import AlumnoSerieService from '../services/AlumnoSerieService'
 
 let baseUrl = 'http://143.198.156.48/demo-colegio/'
-//let baseUrl = 'http://demo-colegio.com/' //base url desarrollo
+    //let baseUrl = 'http://demo-colegio.com/' //base url desarrollo
     //let baseUrl = 'http://143.244.151.1/colegio-san-pablo/' //base url produccion san pablo
 let token_data = JSON.parse(localStorage.getItem('token_data'))
 

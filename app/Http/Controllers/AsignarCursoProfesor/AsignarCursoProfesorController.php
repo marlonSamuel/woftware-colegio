@@ -70,7 +70,7 @@ class AsignarCursoProfesorController extends ApiController
             }
         });
 
-        return $this->showAll($inscripciones_filter);
+        return $this->showAll($inscripciones_filter->values());
     }
 
     public function cursoGradoNivel(){

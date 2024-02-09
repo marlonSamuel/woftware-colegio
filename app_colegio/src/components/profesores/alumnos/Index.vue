@@ -200,6 +200,7 @@ export default {
                     return
                 }
                 self.items = r.data
+                console.log(self.items)
             }).catch(e => {
 
             })

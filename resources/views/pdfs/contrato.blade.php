@@ -101,7 +101,7 @@
             {{$responsable->apoderado->estado_civil}}, nacionalidad Guatemalteca de profesión u oficio: {{$responsable->apoderado->ocupacion}} me identifico con Documento Personal de Identificación –DPI- número {{$responsable->apoderado->cui}} extendido por el REGISTRO NACIONAL DE LAS PERSONAS -RENAP- DE LA REPÚBLICA DE GUATEMALA, con residencia en: {{$responsable->apoderado->direccion}} con número de teléfono
 
             @foreach ($responsable->apoderado->telefonos as $t)
-            <span style="margin-left: 5px;"></span> {{ $t->tipo_telefono == 'C' ? '   Casa: '.$t->telefono : $t->tipo_telefono == 'O' ? '    Oficina: '.$t->telefono : '      Celular: '.$t->telefono }}
+            <span style="margin-left: 5px;"></span> {{ $t->tipo_telefono == 'C' ? '   Casa: '.$t->telefono : ($t->tipo_telefono == 'O' ? '    Oficina: '.$t->telefono : '      Celular: '.$t->telefono) }}
             @endforeach
 
             , actuó en mi calidad de: @if ($responsable->tipo_apoderado === 'P')

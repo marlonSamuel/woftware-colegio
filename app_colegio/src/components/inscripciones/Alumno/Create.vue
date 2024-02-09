@@ -268,6 +268,7 @@
                         </v-flex>
                         <v-flex xs12 sm4 md4>
                             <v-autocomplete
+                                :readonly="form.representante_id !== null"
                                 v-model="form.municipio_id"
                                 label="Extendido en"
                                 placeholder="Departamento / Municipio"
@@ -699,6 +700,10 @@ export default {
         self.form.direccion_a = data.direccion
         self.form.telefono_a= data.telefonos[0].telefono
         self.form.ocupacion = data.ocupacion
+        self.form.estado_civil = data.estado_civil
+        self.form.nacionalidad = data.nacionalidad
+        self.form.municipio_id = data.municipio_id
+
     },
 
     //limpiar data de formulario

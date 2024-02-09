@@ -145,6 +145,8 @@ class AsignacionController extends ApiController
         $asignacione->fecha_entrega = $request->fecha_entrega;
         $asignacione->nota = $request->nota;
         $asignacione->entrega_tarde = $request->entrega_tarde;
+        $asignacione->flag_tiempo = $request->flag_tiempo;
+        $asignacione->tiempo = $request->tiempo;
 
         if(!is_null($request->file) && $request->file !== "" && $request->file !== "null"){
             $folder = 'asignaciones_'.$asignacione->asignar_curso_profesor_id;
